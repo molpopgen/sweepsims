@@ -62,7 +62,7 @@ else
 GFOURFLAGS=
 endif
 
-CXXFLAGS=$(CXXOTHERFLAGS) $(PROF) $(GFIVEFLAGS) $(GFOURFLAGS) $(AMD64FLAGS) -Wall -W -ansi -pedantic
+AM_CXXFLAGS=$(CXXOTHERFLAGS) $(PROF) $(GFIVEFLAGS) $(GFOURFLAGS) $(AMD64FLAGS) -Wall -W -ansi -pedantic
 #  uncomment the following if sweepsims requires the math library
 #sweepsims_LDADD=-lm
 
