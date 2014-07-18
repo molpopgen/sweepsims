@@ -64,10 +64,27 @@ Some of the programs have been used in various publications over the years, and 
 
 rsweep_stochCG and rsweep_stochCGdist were developed for, and used in:
 
-@article{Jensen:2008eo, author = {Jensen, Jeffrey D and Thornton, Kevin R and Andolfatto, Peter}, title = {{An approximate bayesian estimator suggests strong, recurrent selective sweeps in Drosophila.}}, journal = {PLoS Genetics}, year = {2008}, volume = {4}, number = {9}, pages = {e1000198} }
-
+```
+@article{Jensen:2008eo, 
+	author = {Jensen, Jeffrey D and Thornton, Kevin R and Andolfatto, Peter}, 
+	title = {{An approximate bayesian estimator suggests strong, recurrent selective sweeps in Drosophila.}}, 
+	journal = {PLoS Genetics},
+	year = {2008}, 
+	volume = {4}, 
+	number = {9}, 
+	pages = {e1000198} }
+```
 sweep_der and sweep_der_randomX were developed for, and used in:
 
-@article{Thornton:2007du, author = {Thornton, Kevin R and Jensen, Jeffrey D}, title = {{Controlling the false-positive rate in multilocus genome scans for selection.}}, journal = {Genetics}, year = {2007}, volume = {175}, number = {2}, pages = {737--750}, month = feb }
-
+```
+@article{Thornton:2007du,
+         author = {Thornton, Kevin R and Jensen, Jeffrey D}, 
+	 title = {{Controlling the false-positive rate in multilocus genome scans for selection.}}, 
+	 journal = {Genetics}, 
+	 year = {2007}, 
+	 volume = {175}, 
+	 number = {2}, 
+	 pages = {737--750}, 
+	 month = feb }
+```
 The programs listed above are (reasonably) well-tested. As with all simulations of selection in the coalescent, there are often strong assumptions in the models that are usually not enforced in the code. This means that the user can inadvertently do "dumb" things by inputting parameter values that are not sensible given the assumptions, and the program will happily do non-rigorous things. Examples include the programs based on deterministic trajectories of beneficial mutations. These models require that 2Ns >= 1000 at the very least. Modeling weaker selection is not a good idea, and one should use the programs based on stochastic trajectories. I strongly encourage the users to go back and refresh their memories with the original literature whenever possible. Caveat emptor, and all that.
