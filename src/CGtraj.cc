@@ -2,9 +2,10 @@
 #include <iostream>
 #include <algorithm>
 #include <iterator>
+#include <functional>
 #include <gsl/gsl_rng.h>
 #include <gsl/gsl_randist.h>
-#include <boost/bind.hpp>
+
 using namespace Sequence;
 using namespace std;
 
@@ -18,6 +19,6 @@ int main(int argc, char **argv)
   gsl_rng_set(r,seed);
 
   vector<double>path;
-  ConditionalTraj(boost::bind(gsl_rng_uniform,r),&path,N,s,1./(4*N),1/double(2*N));
+  ConditionalTraj(std::bind(gsl_rng_uniform,r),&path,N,s,1./(4*N),1/double(2*N));
   copy(path.begin(),path.end(),ostream_iterator<double>(cout,"\n"));
 }

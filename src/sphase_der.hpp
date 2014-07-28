@@ -1,10 +1,12 @@
 #ifndef __SPHASE_HPP__
 #define __SPHASE_HPP__
-
+#include <gsl/gsl_rng.h>
+#include <gsl/gsl_randist.h>
+#include <functional>
 #include <Sequence/Coalescent/SimTypes.hpp>
 
-void selective_phase( Sequence::gsl_uniform & uni,
-		      Sequence::gsl_uniform01 & uni01,
+void selective_phase( std::function<double(const double&,const double&)> & uni,
+		      std::function<double()> & uni01, 
 		      std::vector<Sequence::chromosome> & sample,
 		      Sequence::arg & sample_history,
 		      const int & ttl_nsam,
@@ -19,9 +21,9 @@ void selective_phase( Sequence::gsl_uniform & uni,
 		      const std::vector<double> & path,
 		      const int & X);
 
-void selective_phase_competing( Sequence::gsl_uniform & uni,
-				Sequence::gsl_uniform01 & uni01,
-				Sequence::gsl_exponential & expo,
+void selective_phase_competing( std::function<double(const double&,const double&)> & uni,
+				std::function<double()> & uni01,
+				std::function<double(const double &)> & expo,
 				std::vector<Sequence::chromosome> & sample,
 				Sequence::arg & sample_history,
 				const int & ttl_nsam,

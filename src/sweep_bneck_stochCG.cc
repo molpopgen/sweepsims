@@ -2,7 +2,6 @@
 #include <Sequence/Coalescent/TreeOperations.hpp>
 #include <Sequence/Coalescent/Mutation.hpp>
 #include <Sequence/Coalescent/Trajectories.hpp>
-#include <Sequence/RNG/gsl_rng_wrappers.hpp>
 #include <Sequence/PolySIM.hpp>
 #include <sweep_bneck_arg.hpp>
 #include <iostream>
@@ -12,7 +11,9 @@
 #include <cassert>
 #include <cmath>
 #include <fstream>
-#include <boost/bind.hpp>
+#include <gsl/gsl_rng.h>
+#include <gsl/gsl_randist.h>
+
 using namespace std;
 using namespace Sequence;
 
@@ -75,8 +76,9 @@ int main( int argc, char **argv )
   gsl_rng * r =  gsl_rng_alloc(gsl_rng_mt19937);
   gsl_rng_set(r,seed);
 
-  gsl_uniform uni(r);     
-  gsl_poisson poiss(r); 
+  std::function<double(const double&,const double&)> uni = [r](const double & a, const double & b){ return gsl_ran_flat(r,a,b); };
+  std::function<double(const double&)> poiss = [r](const double & mean){ return gsl_ran_poisson(r,mean); };
+
   double ar;
   const int k = 5;
   const double dtp = 1./(2*k*f*double(N)),ifreq=1./(2.*f*double(N));
@@ -89,7 +91,7 @@ int main( int argc, char **argv )
 	}
       do
 	{
-	  ConditionalTraj(boost::bind(gsl_rng_uniform,r),&path,int(f*double(N)),s,dtp,ifreq);
+	  ConditionalTraj(std::bind(gsl_rng_uniform,r),&path,int(f*double(N)),s,dtp,ifreq);
 	}
       while( (tr+(f*double(path.size())/(4*k*f*double(N)))) >= tr+d );
       Sequence::arg sample_history =  sweep_bneck_argCG(r, n1, nsites, rho,

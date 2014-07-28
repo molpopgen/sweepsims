@@ -2,10 +2,10 @@
 #define __SPHASE_TWOPOP_NOMIG_HPP__
 
 #include<Sequence/Coalescent/SimTypes.hpp>
-#include<Sequence/RNG/gsl_rng_wrappers.hpp>
+#include<functional>
 
-void selective_phase_twopop_nomig( Sequence::gsl_uniform & uni,
-				   Sequence::gsl_uniform01 & uni01,
+void selective_phase_twopop_nomig( std::function<double(const double &,const double &)> & uni,
+				   std::function<double()> & uni01,
 				   std::vector<Sequence::chromosome> & sample,
 				   Sequence::arg & sample_history,
 				   const int & ttl_nsam,

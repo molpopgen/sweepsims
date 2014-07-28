@@ -2,11 +2,13 @@
 #include <Sequence/Coalescent/Coalesce.hpp>
 #include <Sequence/Coalescent/Recombination.hpp>
 #include <Sequence/SeqConstants.hpp>
-#include <Sequence/RNG/gsl_rng_wrappers.hpp>
 #include <util.hpp>
 #include <sphase_der.hpp>
 #include <iostream>
- 
+
+#include <gsl/gsl_rng.h>
+#include <gsl/gsl_randist.h>
+
 using namespace std;
 using namespace Sequence;
 
@@ -28,10 +30,10 @@ Sequence::arg sweep_der_arg(gsl_rng * r,
 		  const vector<chromosome> & initialized_sample,
 		  const marginal & initialized_marginal)
 {
-  gsl_uniform01 uni01(r); 
-  gsl_uniform uni(r);     
-  gsl_exponential expo(r);
-  gsl_poisson poiss(r); 
+  std::function<double(void)> uni01 = [r](){ return gsl_rng_uniform(r); };
+  std::function<double(const double&,const double&)> uni = [r](const double & a, const double & b){ return gsl_ran_flat(r,a,b); };
+  std::function<double(const double&)> expo = [r](const double & mean){ return gsl_ran_exponential(r,mean); };
+  std::function<double(const double&)> poiss = [r](const double & mean){ return gsl_ran_poisson(r,mean); };
   const int nsam = n1+n2;
   int NSAM = nsam,N1=n1,N2=n2;
   int nlinks = NSAM*(nsites-1);

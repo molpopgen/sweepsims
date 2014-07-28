@@ -44,25 +44,7 @@ else
 PROF=
 endif
 
-if AMD64OPT
-AMD64FLAGS=-mcpu=k8 -mtune=k8 -ftree-vectorize
-else
-AMD64FLAGS=
-endif
-
-if GFIVEOPT
-GFIVEFLAGS=-mcpu=G5 -mtune=G5 -mpowerpc64 -mpowerpc-gpopt
-else
-GFIVEFLAGS=
-endif
-
-if GFOUROPT
-GFOURFLAGS=-mcpu=G4 -mtune=G4 -mpowerpc -mpowerpc-gpopt
-else
-GFOURFLAGS=
-endif
-
-AM_CXXFLAGS=$(CXXOTHERFLAGS) $(PROF) $(GFIVEFLAGS) $(GFOURFLAGS) $(AMD64FLAGS) -Wall -W -ansi -pedantic
+AM_CXXFLAGS=$(CXXOTHERFLAGS) $(PROF) -Wall -W -ansi -pedantic
 #  uncomment the following if sweepsims requires the math library
 #sweepsims_LDADD=-lm
 

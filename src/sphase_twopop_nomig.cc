@@ -1,4 +1,3 @@
-#include <Sequence/RNG/gsl_rng_wrappers.hpp>
 #include <Sequence/Coalescent/Coalesce.hpp>
 #include <Sequence/Coalescent/Recombination.hpp>
 #include <sphase.hpp>
@@ -41,7 +40,7 @@ ostream & operator<<( ostream & o, const SEL_EVENT & e )
     o << "ANCREC";
   return o;
 }
-void sel_rec( gsl_uniform01 & uni01, 
+void sel_rec( std::function<double()> & uni01,
 	      vector<chromosome> & sample,
 	      arg & sample_history,
 	      int * NSAM,
@@ -138,8 +137,9 @@ void sel_rec( gsl_uniform01 & uni01,
 #endif
 }
 
-void selective_phase_twopop_nomig( gsl_uniform & uni,
-				   gsl_uniform01 & uni01,
+void selective_phase_twopop_nomig( std::function<double(const double &,const double &)> & uni,
+				   std::function<double()> & uni01,
+
 				   vector<chromosome> & sample,
 				   arg & sample_history,
 				   const int & ttl_nsam,
