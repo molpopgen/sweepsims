@@ -1,6 +1,6 @@
 AC_PREREQ(2.59)
 
-AC_INIT([src/sweep.cc], [0.1.2], [https://github.com/molpopgen/sweepsims])
+AC_INIT(sweepsims, [0.1.2], [https://github.com/molpopgen/sweepsims])
 AC_CONFIG_SRCDIR([src/sweep.cc])
 AM_INIT_AUTOMAKE
 AC_CONFIG_HEADERS([config-h.in])
