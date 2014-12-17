@@ -1,13 +1,15 @@
 #include <Sequence/Coalescent/Coalescent.hpp>
-#include <Sequence/RNG/gsl_rng_wrappers.hpp>
 #include <Sequence/PolySIM.hpp>
-#include <boost/bind.hpp>
 #include <sphase.hpp>
 #include <iostream>
 #include <algorithm>
 #include <iterator>
 #include <numeric>
 #include <cassert>
+#include <functional>
+
+#include <gsl/gsl_rng.h>
+#include <gsl/gsl_randist.h>
 
 using namespace std;
 using namespace Sequence;
@@ -52,10 +54,10 @@ int main( int argc, char **argv )
   gsl_rng_set(r,seed);
 
   double ar;
-  gsl_uniform01 uni01(r); 
-  gsl_uniform uni(r);     
-  gsl_exponential expo(r);
-  gsl_poisson poiss(r); 
+  std::function<double(void)> uni01 = [r](){ return gsl_rng_uniform(r); };
+  std::function<double(const double&,const double&)> uni = [r](const double & a, const double & b){ return gsl_ran_flat(r,a,b); };
+  std::function<double(const double&)> expo = [r](const double & mean){ return gsl_ran_exponential(r,mean); };
+  std::function<double(const double&)> poiss = [r](const double & mean){ return gsl_ran_poisson(r,mean); };
 
   double rcoal,rrec,tcoal,trec,t;
   const int k = 10;
@@ -65,7 +67,7 @@ int main( int argc, char **argv )
       int NSAM = nsam;
       int nlinks = NSAM*(nsites-1);
       vector<chromosome> sample(initialized_sample);
-      Sequence::arg sample_history(1,initialized_marginal);
+      ARG sample_history(1,initialized_marginal);
       bool neutral = true;
       t=0.;
       while ( NSAM > 1 )

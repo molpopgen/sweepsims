@@ -2,18 +2,19 @@
 #include <Sequence/Coalescent/Coalesce.hpp>
 #include <Sequence/Coalescent/Recombination.hpp>
 #include <Sequence/SeqConstants.hpp>
-#include <Sequence/RNG/gsl_rng_wrappers.hpp>
 #include <util.hpp>
 #include <sphase_bneck.hpp>
 #include <iostream>
 #include <cmath>
-
+#include <functional>
+#include <gsl/gsl_rng.h>
+#include <gsl/gsl_randist.h>
 using namespace std;
 using namespace Sequence;
 
 //enum NEUT_EVENT {CA1,CA2,REC};
 
-Sequence::arg sweep_bneck_arg(gsl_rng * r,
+ARG sweep_bneck_arg(gsl_rng * r,
 		    const int & n1,
 		    const int & nsites,
 		    const double & rho,
@@ -29,15 +30,16 @@ Sequence::arg sweep_bneck_arg(gsl_rng * r,
 		    const marginal & initialized_marginal,
 		    const double & dt)
 {
-  gsl_uniform01 uni01(r); 
-  gsl_uniform uni(r);     
-  gsl_exponential expo(r);
-  gsl_poisson poiss(r); 
+  std::function<double(void)> uni01 = [r](){ return gsl_rng_uniform(r); };
+  std::function<double(const double&,const double&)> uni = [r](const double & a, const double & b){ return gsl_ran_flat(r,a,b); };
+  std::function<double(const double&)> expo = [r](const double & mean){ return gsl_ran_exponential(r,mean); };
+  std::function<double(const double&)> poiss = [r](const double & mean){ return gsl_ran_poisson(r,mean); };
+
   const int nsam = n1;
   int NSAM = nsam;
   int nlinks = NSAM*(nsites-1);
   vector<chromosome> sample(initialized_sample);
-  Sequence::arg sample_history(1,initialized_marginal);
+  ARG sample_history(1,initialized_marginal);
   bool neutral = true;
   double t=0.;
   //double rc1,rc2,rrec,tc1,tc2,trec,tmin;
@@ -116,7 +118,7 @@ Sequence::arg sweep_bneck_arg(gsl_rng * r,
   return sample_history;
 }
 
-Sequence::arg sweep_bneck_argCG(gsl_rng * r,
+ARG sweep_bneck_argCG(gsl_rng * r,
 		      const int & n1,
 		      const int & nsites,
 		      const double & rho,
@@ -133,15 +135,15 @@ Sequence::arg sweep_bneck_argCG(gsl_rng * r,
 		      const int & k,
 		      const double & dt)
 {
-  gsl_uniform01 uni01(r); 
-  gsl_uniform uni(r);     
-  gsl_exponential expo(r);
-  gsl_poisson poiss(r); 
+  std::function<double(void)> uni01 = [r](){ return gsl_rng_uniform(r); };
+  std::function<double(const double&,const double&)> uni = [r](const double & a, const double & b){ return gsl_ran_flat(r,a,b); };
+  std::function<double(const double&)> expo = [r](const double & mean){ return gsl_ran_exponential(r,mean); };
+  std::function<double(const double&)> poiss = [r](const double & mean){ return gsl_ran_poisson(r,mean); };
   const int nsam = n1;
   int NSAM = nsam;
   int nlinks = NSAM*(nsites-1);
   vector<chromosome> sample(initialized_sample);
-  Sequence::arg sample_history(1,initialized_marginal);
+  ARG sample_history(1,initialized_marginal);
   bool neutral = true;
   double t=0.;
   //double rc1,rc2,rrec,tc1,tc2,trec,tmin;

@@ -1,5 +1,6 @@
 #ifndef __SWEEP_DER_ARG_HPP__
 #define __SWEEP_DER_ARG_HPP__
+#include <common.hpp>
 #include <Sequence/Coalescent/SimTypes.hpp>
 #include <gsl/gsl_rng.h>
 
@@ -20,7 +21,7 @@
   \param X position of beneficial mutation
   \param path trajectory of beneficial allele, calculated with xi=1/(2N0f) and alpha = 2N0fs
 */
-Sequence::arg sweep_der_arg(gsl_rng * r,
+ARG sweep_der_arg(gsl_rng * r,
 			    const int & n1,
 			    const int & n2,
 			    const int & nsites,
@@ -33,7 +34,7 @@ Sequence::arg sweep_der_arg(gsl_rng * r,
 			    const double & tau,
 			    const int & X,
 			    const std::vector<double> & path,
-			    const std::vector<Sequence::chromosome> & initialized_sample,
-			    const Sequence::marginal & initialized_marginal);
+			    const std::vector<chromosome> & initialized_sample,
+			    const marginal & initialized_marginal);
 
 #endif

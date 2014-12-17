@@ -1,7 +1,5 @@
 #include <Sequence/Coalescent/Coalescent.hpp>
-#include <Sequence/RNG/gsl_rng_wrappers.hpp>
 #include <Sequence/PolySIM.hpp>
-#include <boost/bind.hpp>
 #include <sphase.hpp>
 #include <iostream>
 #include <fstream>
@@ -10,6 +8,9 @@
 #include <numeric>
 #include <cassert>
 #include <cmath>
+
+#include <gsl/gsl_rng.h>
+#include <gsl/gsl_randist.h>
 
 using namespace std;
 using namespace Sequence;
@@ -74,10 +75,10 @@ int main( int argc, char **argv )
       fclose(fp);
     }
   */
-  gsl_uniform01 uni01(r); 
-  gsl_uniform uni(r);     
-  gsl_exponential expo(r);
-  gsl_poisson poiss(r); 
+  std::function<double(void)> uni01 = [r](){ return gsl_rng_uniform(r); };
+  std::function<double(const double&,const double&)> uni = [r](const double & a, const double & b){ return gsl_ran_flat(r,a,b); };
+  std::function<double(const double&)> expo = [r](const double & mean){ return gsl_ran_exponential(r,mean); };
+  std::function<double(const double&)> poiss = [r](const double & mean){ return gsl_ran_poisson(r,mean); }; 
 
   double rcoal,rrec,rsweepin=SEQMAXDOUBLE,rsweepout=SEQMAXDOUBLE,tcoal,trec,t,tsweep;
   double maxd = 4.*double(N)*s;
@@ -96,7 +97,7 @@ int main( int argc, char **argv )
       int NSAM = nsam;
       int nlinks = NSAM*(nsites-1);
       vector<chromosome> sample(initialized_sample);
-      Sequence::arg sample_history(1,initialized_marginal);
+      ARG sample_history(1,initialized_marginal);
       bool neutral = true;
       t=0.;
       while ( NSAM > 1 )
@@ -168,7 +169,7 @@ int main( int argc, char **argv )
 		    }
 		}
 	      //std::cerr << X << endl;
-	      ConditionalTraj(boost::bind(gsl_rng_uniform,r),&path,N,s,dtp,ifreq);
+	      ConditionalTraj(uni01,&path,N,s,dtp,ifreq);
 	      //cerr << "sel phase..." << path.size() << "...";
 	      selective_phase(uni,uni01,sample,sample_history,nsam,&NSAM,
 			      &nlinks,&t,rho,nsites,N,path,X,1./double(2*N),1./double(4*k*N));

@@ -1,7 +1,6 @@
 #include <Sequence/Coalescent/Initialize.hpp>
 #include <Sequence/Coalescent/TreeOperations.hpp>
 #include <Sequence/Coalescent/Mutation.hpp>
-#include <Sequence/RNG/gsl_rng_wrappers.hpp>
 #include <Sequence/PolySIM.hpp>
 #include <detpath.hpp>
 #include <sweep_bneck_arg.hpp>
@@ -12,6 +11,9 @@
 #include <cassert>
 #include <cmath>
 #include <fstream>
+
+#include <gsl/gsl_rng.h>
+#include <gsl/gsl_randist.h>
 
 using namespace std;
 using namespace Sequence;
@@ -95,8 +97,8 @@ int main( int argc, char **argv )
   //gsl_rng_set(r,time(0));
   gsl_rng_set(r,seed);
 
-  gsl_uniform uni(r);     
-  gsl_poisson poiss(r); 
+  std::function<double(const double&,const double&)> uni = [r](const double & a, const double & b){ return gsl_ran_flat(r,a,b); };
+  std::function<double(const double&)> poiss = [r](const double & mean){ return gsl_ran_poisson(r,mean); }; 
 
   for(int rep = 0 ; rep < nreps ; ++rep)
     {
@@ -105,7 +107,7 @@ int main( int argc, char **argv )
 	{
 	  sel_site = int(gsl_ran_flat(r,0.,double(nsites)));
 	}
-      Sequence::arg sample_history =  sweep_bneck_arg(r, n1, nsites, rho,
+      ARG sample_history =  sweep_bneck_arg(r, n1, nsites, rho,
 						      tr, d, f, N, s, tau, sel_site, path,
 						      initialized_sample,initialized_marginal,
 						      1./floor(f*4.*double(N)));

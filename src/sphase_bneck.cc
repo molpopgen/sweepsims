@@ -1,4 +1,3 @@
-#include <Sequence/RNG/gsl_rng_wrappers.hpp>
 #include <Sequence/Coalescent/Coalesce.hpp>
 #include <Sequence/Coalescent/Recombination.hpp>
 #include <sphase.hpp>
@@ -15,7 +14,7 @@ using namespace Sequence;
 enum SEL_EVENT { FAVCOAL,UNFAVCOAL,FAVREC,FAVREC2UNFAV,
 		 UNFAVREC,UNFAVREC2FAV,CHAOS };
 
-void sel_rec( gsl_uniform01 & uni01, 
+void sel_rec( std::function<double()> & uni01,
 	      vector<chromosome> & sample,
 	      arg & sample_history,
 	      int * NSAM,
@@ -110,8 +109,8 @@ void sel_rec( gsl_uniform01 & uni01,
 #endif
 }
 
-void selective_phase( gsl_uniform & uni,
-		      gsl_uniform01 & uni01,
+void selective_phase( std::function<double(const double &, const double &)> & uni,
+		      std::function<double()> & uni01,
 		      vector<chromosome> & sample,
 		      arg & sample_history,
 		      const int & ttl_nsam,
@@ -285,8 +284,8 @@ void selective_phase( gsl_uniform & uni,
     }
 }
 
-void selective_phaseCG( gsl_uniform & uni,
-			gsl_uniform01 & uni01,
+void selective_phaseCG( std::function<double(const double &, const double &)> & uni,
+			std::function<double()> & uni01,
 			vector<chromosome> & sample,
 			arg & sample_history,
 			const int & ttl_nsam,
@@ -386,11 +385,11 @@ void selective_phaseCG( gsl_uniform & uni,
 		pair<int,int> two = pick2_in_deme(uni,sample,*NSAM,
 						  config[pop],pop);
 		//the use of slinks lost will make no sense
-		//unless you study how Sequence::Coalesce works.
+		//unless you study how Coalesce works.
 		//We need to keep track of the number of links
 		//(relative to position of selected site) that
 		//are lost from the sample due to the coalescent event.
-		//We figure this out by doing what Sequence::Coalesce
+		//We figure this out by doing what Coalesce
 		//does, but in reverse (ugh).
 		int slinks_lost = slinks(sample[two.first],X);
 		int rv = coalesce(*t,ttl_nsam,*NSAM,two.first,two.second,nsites,

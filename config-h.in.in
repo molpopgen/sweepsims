@@ -1,4 +1,4 @@
-/* config.h.in.  Generated from configure.ac by autoheader.  */
+/* config-h.in.in.  Generated from configure.ac by autoheader.  */
 
 /* define if the compiler supports basic C++11 syntax */
 #undef HAVE_CXX11
@@ -20,9 +20,6 @@
 
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
-
-/* "Have namespace Sequence::coalsim" */
-#undef HAVE_SEQUENCE_COALSIM
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #undef HAVE_STDINT_H
