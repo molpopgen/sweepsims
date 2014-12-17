@@ -14,7 +14,7 @@ using namespace Sequence;
 
 enum NEUT_EVENT {CA1,CA2,REC};
 
-Sequence::arg sweep_der_arg(gsl_rng * r,
+ARG sweep_der_arg(gsl_rng * r,
 		  const int & n1,
 		  const int & n2,
 		  const int & nsites,
@@ -38,7 +38,7 @@ Sequence::arg sweep_der_arg(gsl_rng * r,
   int NSAM = nsam,N1=n1,N2=n2;
   int nlinks = NSAM*(nsites-1);
   vector<chromosome> sample(initialized_sample);
-  Sequence::arg sample_history(1,initialized_marginal);
+  ARG sample_history(1,initialized_marginal);
   bool neutral = true;
   double t=0.;
   double size = 1.;

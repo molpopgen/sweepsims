@@ -1,6 +1,6 @@
 #include <util.hpp>
 
-int slinks( const Sequence::chromosome & c,
+int slinks( const chromosome & c,
 		   const int & X )
 {
   return ( std::max(X,c.last()) - std::min(X,c.first()) );
@@ -10,7 +10,7 @@ std::pair<int,int>
 pick_uniform_spot2(const double & random_01,
 		   const int & nlinks,
 		   const int & X,
-		   std::vector<Sequence::chromosome>::const_iterator sample_begin,
+		   std::vector<chromosome>::const_iterator sample_begin,
 		   const unsigned & current_nsam,
 		   const int & deme)
 {
@@ -35,7 +35,7 @@ pick_uniform_spot2(const double & random_01,
 std::pair<int,int> 
 pick_uniform_spot3(const double & random_01,
 		   const int & nlinks,
-		   std::vector<Sequence::chromosome>::const_iterator sample_begin,
+		   std::vector<chromosome>::const_iterator sample_begin,
 		   const unsigned & current_nsam,
 		   const int & deme)
 {

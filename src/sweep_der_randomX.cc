@@ -117,7 +117,7 @@ int main( int argc, char **argv )
       while ( (X = int(gsl_ran_flat(r,1,nsites))) == nsites );
       cerr << X << '\n';
       X--;
-      Sequence::arg sample_history =  sweep_der_arg(r, n1, n2, nsites, rho,
+      ARG sample_history =  sweep_der_arg(r, n1, n2, nsites, rho,
 						    tr, d, f, N, s, tau, X, path,
 						    initialized_sample,initialized_marginal);
       minimize_arg(&sample_history);

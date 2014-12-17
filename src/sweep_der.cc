@@ -115,7 +115,7 @@ int main( int argc, char **argv )
   for(int rep = 0 ; rep < nreps ; ++rep)
     {
       cerr << rep << '\n';
-      Sequence::arg sample_history =  sweep_der_arg(r, n1, n2, nsites, rho,
+      ARG sample_history =  sweep_der_arg(r, n1, n2, nsites, rho,
 						    tr, d, f, N, s, tau, X, path,
 						    initialized_sample,initialized_marginal);
       minimize_arg(&sample_history);

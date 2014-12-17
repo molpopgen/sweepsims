@@ -225,11 +225,11 @@ void selective_phase(std::function<double(const double &,const double &)> & uni,
 		  pair<int,int> two = pick2_in_deme(uni,sample,*NSAM,
 						    config[pop],pop);
 		  //the use of slinks lost will make no sense
-		  //unless you study how Sequence::Coalesce works.
+		  //unless you study how Coalesce works.
 		  //We need to keep track of the number of links
 		  //(relative to position of selected site) that
 		  //are lost from the sample due to the coalescent event.
-		  //We figure this out by doing what Sequence::Coalesce
+		  //We figure this out by doing what Coalesce
 		  //does, but in reverse (ugh).
 		  int slinks_lost = slinks(sample[two.first],X);
 		  int rv = coalesce(*t,ttl_nsam,*NSAM,two.first,two.second,nsites,
@@ -425,11 +425,11 @@ void selective_phase_partial( std::function<double(const double &,const double &
 		  pair<int,int> two = pick2_in_deme(uni,sample,*NSAM,
 						    config[pop],pop);
 		  //the use of slinks lost will make no sense
-		  //unless you study how Sequence::Coalesce works.
+		  //unless you study how Coalesce works.
 		  //We need to keep track of the number of links
 		  //(relative to position of selected site) that
 		  //are lost from the sample due to the coalescent event.
-		  //We figure this out by doing what Sequence::Coalesce
+		  //We figure this out by doing what Coalesce
 		  //does, but in reverse (ugh).
 		  int slinks_lost = slinks(sample[two.first],X);
 		  int rv = coalesce(*t,ttl_nsam,*NSAM,two.first,two.second,nsites,
@@ -609,11 +609,11 @@ void selective_phase_competing( std::function<double(const double &,const double
 		  pair<int,int> two = pick2_in_deme(uni,sample,*NSAM,
 						    config[pop],pop);
 		  //the use of slinks lost will make no sense
-		  //unless you study how Sequence::Coalesce works.
+		  //unless you study how Coalesce works.
 		  //We need to keep track of the number of links
 		  //(relative to position of selected site) that
 		  //are lost from the sample due to the coalescent event.
-		  //We figure this out by doing what Sequence::Coalesce
+		  //We figure this out by doing what Coalesce
 		  //does, but in reverse (ugh).
 		  int slinks_lost = slinks(sample[two.first],X);
 		  int rv = coalesce(*t,ttl_nsam,*NSAM,two.first,two.second,nsites,

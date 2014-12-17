@@ -94,7 +94,7 @@ int main( int argc, char **argv )
 	  ConditionalTraj(std::bind(gsl_rng_uniform,r),&path,int(f*double(N)),s,dtp,ifreq);
 	}
       while( (tr+(f*double(path.size())/(4*k*f*double(N)))) >= tr+d );
-      Sequence::arg sample_history =  sweep_bneck_argCG(r, n1, nsites, rho,
+      ARG sample_history =  sweep_bneck_argCG(r, n1, nsites, rho,
 							tr, d, f, N, s, tau, sel_site, path,
 							initialized_sample,initialized_marginal,k,1./double(4*k*f*N));
       minimize_arg(&sample_history);

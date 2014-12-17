@@ -93,7 +93,7 @@ int main( int argc, char **argv )
 	  path = rev_traj(r,1.-1./(2.*f*double(N)),-2.*s,0.5,int(f*double(N)),&ar);
 	}
       while( (tr+(f*double(path.size())/(4.*f*double(N)))) >= tr+d );
-      Sequence::arg sample_history =  sweep_bneck_arg(r, n1, nsites, rho,
+      ARG sample_history =  sweep_bneck_arg(r, n1, nsites, rho,
 						      tr, d, f, N, s, tau, sel_site, path,
 						      initialized_sample,initialized_marginal,
 						      1./floor(4.*f*double(N)));

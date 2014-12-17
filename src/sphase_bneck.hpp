@@ -1,12 +1,13 @@
 #ifndef __SPHASE_HPP__
 #define __SPHASE_HPP__
 
+#include <common.hpp>
 #include <Sequence/Coalescent/SimTypes.hpp>
 #include <functional>
 void selective_phase (std::function<double(const double &, const double &)> & uni,
 		      std::function<double()> & uni01,
-		      std::vector<Sequence::chromosome> & sample,
-		      Sequence::arg & sample_history,
+		      std::vector<chromosome> & sample,
+		      ARG & sample_history,
 		      const int & ttl_nsam,
 		      int * NSAM,
 		      int * nlinks,
@@ -22,8 +23,8 @@ void selective_phase (std::function<double(const double &, const double &)> & un
 
 void selective_phaseCG(std::function<double(const double &, const double &)> & uni,
 		       std::function<double()> & uni01,
-			std::vector<Sequence::chromosome> & sample,
-			Sequence::arg & sample_history,
+			std::vector<chromosome> & sample,
+			ARG & sample_history,
 			const int & ttl_nsam,
 			int * NSAM,
 			int * nlinks,

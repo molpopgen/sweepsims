@@ -1,12 +1,12 @@
 #ifndef __SPHASE_HPP__
 #define __SPHASE_HPP__
-
+#include <common.hpp>
 #include <Sequence/Coalescent/SimTypes.hpp>
 #include <functional>
 void selective_phase( std::function<double(const double &,const double &)> & uni,
 		      std::function<double()> & uni01,
-		     std::vector<Sequence::chromosome> & sample,
-		     Sequence::arg & sample_history,
+		     std::vector<chromosome> & sample,
+		     ARG & sample_history,
 		     const int & ttl_nsam,
 		     int * NSAM,
 		     int * nlinks,
@@ -22,8 +22,8 @@ void selective_phase( std::function<double(const double &,const double &)> & uni
 
 void selective_phase_partial(std::function<double(const double &,const double &)> & uni,
 			     std::function<double()> & uni01,
-			     std::vector<Sequence::chromosome> & sample,
-			     Sequence::arg & sample_history,
+			     std::vector<chromosome> & sample,
+			     ARG & sample_history,
 			     const int & ttl_nsam,
 			     int * NSAM,
 			     int * nlinks,
@@ -41,8 +41,8 @@ void selective_phase_partial(std::function<double(const double &,const double &)
 void selective_phase_competing(std::function<double(const double &,const double &)> & uni,
 			       std::function<double()> & uni01,
 			       std::function<double(const double &)> & expo,
-			       std::vector<Sequence::chromosome> & sample,
-			       Sequence::arg & sample_history,
+			       std::vector<chromosome> & sample,
+			       ARG & sample_history,
 			       const int & ttl_nsam,
 			       int * NSAM,
 			       int * nlinks,
@@ -57,10 +57,10 @@ void selective_phase_competing(std::function<double(const double &,const double 
 			       const int & k = 1);
 
 /*
-void selective_phase_linked(Sequence::gsl_uniform & uni,
-			    Sequence::gsl_uniform01 & uni01,
-			    std::vector<Sequence::chromosome> & sample,
-			    Sequence::arg & sample_history,
+void selective_phase_linked(gsl_uniform & uni,
+			    gsl_uniform01 & uni01,
+			    std::vector<chromosome> & sample,
+			    ARG & sample_history,
 			    const int & ttl_nsam,
 			    int * NSAM,
 			    int * nlinks,
@@ -75,10 +75,10 @@ void selective_phase_linked(Sequence::gsl_uniform & uni,
 			    const int & k = 1);
 */
 /*
-void selective_phase_CG( Sequence::gsl_uniform & uni,
-			 Sequence::gsl_uniform01 & uni01,
-			 std::vector<Sequence::chromosome> & sample,
-			 Sequence::arg & sample_history,
+void selective_phase_CG( gsl_uniform & uni,
+			 gsl_uniform01 & uni01,
+			 std::vector<chromosome> & sample,
+			 ARG & sample_history,
 			 const int & ttl_nsam,
 			 int * NSAM,
 			 int * nlinks,

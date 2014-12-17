@@ -89,7 +89,7 @@ int main( int argc, char **argv )
       config[1]=nsam2;
       int nlinks = NSAM*(nsites-1);
       vector<chromosome> sample(initialized_sample);
-      Sequence::arg sample_history(1,initialized_marginal);
+      ARG sample_history(1,initialized_marginal);
       bool neutral = true;
       t=0.;
       while ( NSAM > 1 )

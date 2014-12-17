@@ -3,7 +3,7 @@ AC_PREREQ(2.59)
 AC_INIT(sweepsims, [0.1.2], [https://github.com/molpopgen/sweepsims])
 AC_CONFIG_SRCDIR([src/sweep.cc])
 AM_INIT_AUTOMAKE
-AC_CONFIG_HEADERS([config-h.in])
+AC_CONFIG_HEADERS([config.h])
 
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -45,6 +45,20 @@ dnl AC_CHECK_HEADER(boost/tuple/tuple.hpp,,[AC_MSG_ERROR([boot::tuple required -
 
 dnl gsl.  dependency removed in 1.8.3
 dnl AC_CHECK_HEADER(gsl/gsl_rng.h, LIBSEQUENCE_USE_GSL=1 , [AC_MSG_ERROR([gsl/gsl_rng.h not found.  Please install GSL from http://www.gnu.org/software/gsl])])
+
+AC_MSG_CHECKING(for namespace Sequence::coalsim)
+AC_TRY_COMPILE(
+[
+#include <Sequence/Coalescent/Coalescent.hpp>
+
+using namespace Sequence::coalsim;
+],
+[
+Sequence::coalsim::arg x;
+],
+[AC_MSG_RESULT(yes)
+AC_DEFINE([HAVE_SEQUENCE_COALSIM],[],"Have namespace Sequence::coalsim")],
+[AC_MSG_RESULT(no)])
 
 AC_CHECK_LIB(gslcblas,main,,[echo "GSL BLAS runtime library not found";exit 1])
 AC_CHECK_LIB(gsl,main,,[echo "GSL runtime library not found";exit 1])

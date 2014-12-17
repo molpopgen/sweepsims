@@ -14,7 +14,7 @@ using namespace Sequence;
 
 //enum NEUT_EVENT {CA1,CA2,REC};
 
-Sequence::arg sweep_bneck_arg(gsl_rng * r,
+ARG sweep_bneck_arg(gsl_rng * r,
 		    const int & n1,
 		    const int & nsites,
 		    const double & rho,
@@ -39,7 +39,7 @@ Sequence::arg sweep_bneck_arg(gsl_rng * r,
   int NSAM = nsam;
   int nlinks = NSAM*(nsites-1);
   vector<chromosome> sample(initialized_sample);
-  Sequence::arg sample_history(1,initialized_marginal);
+  ARG sample_history(1,initialized_marginal);
   bool neutral = true;
   double t=0.;
   //double rc1,rc2,rrec,tc1,tc2,trec,tmin;
@@ -118,7 +118,7 @@ Sequence::arg sweep_bneck_arg(gsl_rng * r,
   return sample_history;
 }
 
-Sequence::arg sweep_bneck_argCG(gsl_rng * r,
+ARG sweep_bneck_argCG(gsl_rng * r,
 		      const int & n1,
 		      const int & nsites,
 		      const double & rho,
@@ -143,7 +143,7 @@ Sequence::arg sweep_bneck_argCG(gsl_rng * r,
   int NSAM = nsam;
   int nlinks = NSAM*(nsites-1);
   vector<chromosome> sample(initialized_sample);
-  Sequence::arg sample_history(1,initialized_marginal);
+  ARG sample_history(1,initialized_marginal);
   bool neutral = true;
   double t=0.;
   //double rc1,rc2,rrec,tc1,tc2,trec,tmin;

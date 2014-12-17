@@ -107,7 +107,7 @@ int main( int argc, char **argv )
 	{
 	  sel_site = int(gsl_ran_flat(r,0.,double(nsites)));
 	}
-      Sequence::arg sample_history =  sweep_bneck_arg(r, n1, nsites, rho,
+      ARG sample_history =  sweep_bneck_arg(r, n1, nsites, rho,
 						      tr, d, f, N, s, tau, sel_site, path,
 						      initialized_sample,initialized_marginal,
 						      1./floor(f*4.*double(N)));
