@@ -22,11 +22,11 @@ Comments are welcome.
 
 	- Kevin Thornton <krthornt@uci.edu>
 
-#Dependencies
+# Dependencies
 
 libsequence (http://github.com/molpopgen/libsequence)
 
-#Installation
+# Installation
 
 ./configure
 
@@ -34,7 +34,7 @@ make
 
 sudo make install
 
-##If dependent libraries are in non-standard locations.  For example, "/opt":
+## If dependent libraries are in non-standard locations.  For example, "/opt":
 
 CXXFLAGS=-I/opt/include LDFLAGS="$LDFLAGS -L/opt/lib" ./configure
 
@@ -42,7 +42,7 @@ make
 
 sudo make install
 
-##Installing somewhere other than /usr/local/bin
+## Installing somewhere other than /usr/local/bin
 
 ./configure --prefix=/path/to/where/you/want/it
 
@@ -56,7 +56,7 @@ make install
 
 will result in msstats being in ~/bin.
 
-#Usage
+# Usage
 
 Over the years, I've done lots of modeling of selective sweeps, and this repo has been my "think-tank" for developing the necessary simulations. It is here on git now. To figure out what a program does, try to run it w/no arguments and see what it asks you to do. If a program segfaults when run w/no arguments, the reason is that the program is not checking for no arguments. You'd need to read the code to figure out the arguments. (Such programs have not been used for research, and may be in various states of disarray.)
 
