@@ -1,3 +1,9 @@
+# This project is no longer maintained
+
+As of April 23, 2018, this project is archived.  The last compatible version of libsequence that
+you can use to compile this code is 1.9.2.  I strongly encourage you to use other code for sweep
+simulations, such as [discoal](https://github.com/kern-lab/discoal).
+
 	sweepsims - A collection of programs to simulate selective sweeps under different scenarios
 
 
